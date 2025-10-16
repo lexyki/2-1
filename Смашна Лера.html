@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зелений Дім | Магазин кімнатних рослин</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #ffb300;
+            --accent: #4caf50;
+            --dark: #1b5e20;
+            --light: #f1f8e9;
+            --text: #333;
+            --gray: #666;
+            --white: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--white);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--primary);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About */
+        .about {
+            background-color: var(--light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .about-features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Plants */
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .plant-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .plant-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .plant-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            width: 100%;
+            font-weight: 500;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* Services */
+        .services {
+            background-color: var(--light);
+        }
+
+        .services-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-option {
+            background-color: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-option:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .service-option h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        /* Contacts */
+        .contacts-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .contact-info h3:first-child {
+            margin-top: 0;
+        }
+
+        .contact-form {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content,
+            .contacts-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 1rem;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav li {
+                width: 100%;
+                text-align: center;
+                padding: 0.5rem 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .plants-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    <div class="logo-text">Зелений <span>Дім</span></div>
+                </div>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#home" class="active">Головна</a></li>
+                        <li><a href="#about">Про нас</a></li>
+                        <li><a href="#plants">Рослини</a></li>
+                        <li><a href="#services">Послуги</a></li>
+                        <li><a href="#contacts">Контакти</a></li>
+                    </ul>
+                </nav>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Зелені друзі для вашого дому</h1>
+                <p>Найкращі кімнатні рослини для створення затишку та здорового мікроклімату у вашому просторі</p>
+                <div>
+                    <a href="#plants" class="btn btn-primary">До каталогу</a>
+                    <a href="#services" class="btn btn-secondary">Наші послуги</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Про наш магазин</h2>
+                <p>Ми працюємо понад 8 років, допомагаючи створити зелений оазис у вашому домі</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Наша місія - озеленення та натхнення</h3>
+                    <p>Наш магазин існує вже понад 8 років. За цей час ми допомогли тисячам клієнтів створити зелений куточок у їхніх домівках. Ми пропонуємо лише якісні та здорові рослини з сертифікованих розплідників.</p>
+                    <p>Наша команда складається з досвідчених флористів та консультантів, які з радістю допоможуть підібрати рослини саме для ваших умов та вподобань.</p>
+                    <ul class="about-features">
+                        <li>Тільки здорові та адаптовані рослини</li>
+                        <li>Консультації з догляду та вибору</li>
+                        <li>Доставка та посадка "під ключ"</li>
+                        <li>Гарантія на всі рослини</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Магазин рослин">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plants Section -->
+    <section class="plants" id="plants">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наші рослини</h2>
+                <p>Широкий вибір кімнатних рослин для будь-якого смаку та рівня досвіду</p>
+            </div>
+            <div class="plants-grid">
+                <div class="plant-card">
+                    <div class="plant-name">Монстера</div>
+                    <div class="plant-price">450 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+                
+                <div class="plant-card">
+                    <div class="plant-name">Фікус Бенджаміна</div>
+                    <div class="plant-price">380 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+                
+                <div class="plant-card">
+                    <div class="plant-name">Замиокулькас</div>
+                    <div class="plant-price">520 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+                
+                <div class="plant-card">
+                    <div class="plant-name">Орхідея Фаленопсис</div>
+                    <div class="plant-price">690 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-name">Сансевієрія</div>
+                    <div class="plant-price">320 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-name">Філодендрон</div>
+                    <div class="plant-price">280 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-name">Кактус мікс</div>
+                    <div class="plant-price">150 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-name">Алое вера</div>
+                    <div class="plant-price">210 грн</div>
+                    <button class="btn btn-outline">Додати в кошик</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наші послуги</h2>
+                <p>Ми пропонуємо повний спектр послуг для ваших зелених друзів</p>
+            </div>
+            <div class="services-options">
+                <div class="service-option">
+                    <div class="service-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Підбір рослин</h3>
+                    <p>Допоможемо підібрати рослини для ваших умов освітлення, вологості та досвіду догляду.</p>
+                </div>
+                
+                <div class="service-option">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Доставка та посадка</h3>
+                    <p>Доставляємо рослини та допомагаємо з правильною посадкою у ваші горщики.</p>
+                </div>
+                
+                <div class="service-option">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Догляд та обрізка</h3>
+                    <p>Професійний догляд за вашими рослинами: пересадка, обрізка, лікування.</p>
+                </div>
+                
+                <div class="service-option">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Консультації</h3>
+                    <p>Навчимо правильно доглядати за рослинами та розв'язувати проблеми зі здоров'ям рослин.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакти</h2>
+                <p>Зв'яжіться з нами, щоб дізнатися більше про наші рослини та послуги</p>
+            </div>
+            <div class="contacts-content">
+                <div class="contact-info">
+                    <h3>Наша адреса</h3>
+                    <p>м. Київ, вул. Зелена, 28</p>
+                    
+                    <h3>Графік роботи</h3>
+                    <p>Пн-Пт: 9:00 - 20:00</p>
+                    <p>Сб-Нд: 10:00 - 18:00</p>
+                    
+                    <h3>Контактні телефони</h3>
+                    <p>+38 (044) 567-89-01</p>
+                    <p>+38 (067) 123-45-67</p>
+                    
+                    <h3>Електронна пошта</h3>
+                    <p>info@greenhouse.ua</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Замовити консультацію</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Ваше ім'я</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">Мене цікавить</label>
+                            <select id="interest" name="interest">
+                                <option value="consultation">Консультація</option>
+                                <option value="purchase">Покупка рослин</option>
+                                <option value="care">Догляд за рослинами</option>
+                                <option value="other">Інше</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Повідомлення</label>
+                            <textarea id="message" name="message" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Надіслати</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Про нас</h4>
+                    <p>Створюємо зелений затишок у ваших домівках з 2015 року. Наша місія - робити життя зеленішим та здоровішим.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Швидкі посилання</h4>
+                    <ul>
+                        <li><a href="#home">Головна</a></li>
+                        <li><a href="#about">Про нас</a></li>
+                        <li><a href="#plants">Рослини</a></li>
+                        <li><a href="#services">Послуги</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Контакти</h4>
+                    <ul>
+                        <li>м. Київ, вул. Зелена, 28</li>
+                        <li>+38 (044) 567-89-01</li>
+                        <li>info@greenhouse.ua</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Соціальні мережі</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Магазин рослин "Зелений Дім". Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenu');
+            const nav = document.getElementById('mainNav');
+            
+            if (mobileMenuToggle && nav) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    this.classList.toggle('active');
+                });
+            }
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = new FormData(this);
+                    const name = formData.get('name');
+                    const phone = formData.get('phone');
+                    const interest = formData.get('interest');
+                    const message = formData.get('message');
+                    
+                    // Simple validation
+                    if (!name || !phone) {
+                        alert('Будь ласка, заповніть обов\'язкові поля (ім\'я та телефон).');
+                        return;
+                    }
+                    
+                    // In a real application, you would send the data to a server here
+                    // For now, we'll just show a success message
+                    alert('Дякуємо за ваше звернення! Ми зв\'яжемося з вами найближчим часом.');
+                    this.reset();
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (nav && nav.classList.contains('active')) {
+                            nav.classList.remove('active');
+                            mobileMenuToggle.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // Add active class to navigation links based on scroll position
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('nav a');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.btn-outline');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plantName = this.closest('.plant-card').querySelector('.plant-name').textContent;
+                    const plantPrice = this.closest('.plant-card').querySelector('.plant-price').textContent;
+                    
+                    // In a real application, you would add the item to a shopping cart
+                    // For now, we'll just show a confirmation message
+                    alert(`Рослину "${plantName}" додано до кошика!\n${plantPrice}`);
+                    
+                    // Add a simple animation to the button
+                    this.textContent = 'Додано';
+                    this.style.backgroundColor = '#4caf50';
+                    this.style.color = 'white';
+                    this.style.borderColor = '#4caf50';
+                    
+                    setTimeout(() => {
+                        this.textContent = 'Додати в кошик';
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                        this.style.borderColor = '';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
